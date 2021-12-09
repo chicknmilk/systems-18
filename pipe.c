@@ -38,7 +38,7 @@ int main() {
 
       int i;
       while (buffer[i]) {
-        buffer[i] = buffer[i] + 1;
+        buffer[i]++;
         i++;
       }
 

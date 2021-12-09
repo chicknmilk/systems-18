@@ -45,6 +45,10 @@ int main() {
 
       int i = 0;
       while (buffer[i]) {
+        if (buffer[i] == '\n') {
+          buffer[i] = '\0';
+          break;
+        }
         buffer[i] = toupper(buffer[i]);
         i++;
       }

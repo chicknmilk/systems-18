@@ -43,9 +43,10 @@ int main() {
       char buffer[1024];
       read(fds1[READ], buffer, 1024);
 
-      // all uppercase buffer
-      for (int i = 0; i < strlen(buffer); i++) {
+      int i = 0;
+      while (buffer[i]) {
         buffer[i] = toupper(buffer[i]);
+        i++;
       }
 
       write(fds2[WRITE], buffer, strlen(buffer));

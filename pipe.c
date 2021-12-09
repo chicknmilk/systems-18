@@ -6,8 +6,7 @@
 #define READ 0
 #define WRITE 1
 
-char toupper(char *str)
-{
+char toupper(char str) {
   int i;
   for (i = 0; str[i] != '\0'; i++)
   {
@@ -31,7 +30,7 @@ int main() {
       close(fds2[WRITE]);
 
       char buffer[1024];
-      printf("Send something to child process: ")
+      printf("Send something to child process: ");
       fgets(buffer, 1024, stdin);
 
       write(fds1[WRITE], buffer, strlen(buffer));

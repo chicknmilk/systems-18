@@ -6,15 +6,6 @@
 #define READ 0
 #define WRITE 1
 
-char toupper(char str) {
-  int i;
-  for (i = 0; str[i] != '\0'; i++)
-  {
-    if (str[i] >= 'a' && str[i] <= 'z')
-      str[i] -= 32;
-  }
-}
-
 int main() {
   int fds1[2];
   int fds2[2];
@@ -46,9 +37,9 @@ int main() {
       read(fds1[READ], buffer, 1024);
 
       int i;
-      for (i = 0; i < strlen(buffer); i++) {
-        if (buffer[i] == '\n') break;
-        buffer[i] = toupper(buffer[i]);
+      while (buffer[i]) {
+        buffer[i] = buffer[i] + 1;
+        i++;
       }
 
       write(fds2[WRITE], buffer, strlen(buffer));

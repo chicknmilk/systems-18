@@ -36,7 +36,7 @@ int main() {
       read(fds1[READ], buffer, 1024);
 
       for (int i = 0; i < strlen(buffer); i++) {
-        if (buffer[i] != '\0') {
+        if (buffer[i] != '\0' && buffer[i] != '\n') {
           buffer[i]++;
         }
       }

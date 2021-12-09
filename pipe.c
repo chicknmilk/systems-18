@@ -6,6 +6,16 @@
 #define READ 0
 #define WRITE 1
 
+void toupper(char *str)
+{
+  int i;
+  for (i = 0; str[i] != '\0'; i++)
+  {
+    if (str[i] >= 'a' && str[i] <= 'z')
+      str[i] -= 32;
+  }
+}
+
 int main() {
   int fds1[2];
   int fds2[2];
@@ -21,12 +31,13 @@ int main() {
       close(fds2[WRITE]);
 
       char buffer[1024];
+      printf("Send something to child process: ")
       fgets(buffer, 1024, stdin);
 
       write(fds1[WRITE], buffer, strlen(buffer));
 
       read(fds2[READ], buffer, 1024);
-      printf("%s\n", buffer);
+      printf("Child process returned: %s\n", buffer);
     }
     else {
       close(fds1[WRITE]);
@@ -35,9 +46,10 @@ int main() {
       char buffer[1024];
       read(fds1[READ], buffer, 1024);
 
-      for (int i = 0; i < strlen(buffer); i++) {
-        if (buffer[i] != '\0' && buffer[i] != '\n') break;
-        buffer[i]++;
+      int i;
+      for (i = 0; i < strlen(buffer); i++) {
+        if (buffer[i] == '\n') break;
+        buffer[i] = toupper(buffer[i]);
       }
 
       write(fds2[WRITE], buffer, strlen(buffer));

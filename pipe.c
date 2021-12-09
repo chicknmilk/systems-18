@@ -6,7 +6,7 @@
 #define READ 0
 #define WRITE 1
 
-void toupper(char *str)
+char toupper(char *str)
 {
   int i;
   for (i = 0; str[i] != '\0'; i++)

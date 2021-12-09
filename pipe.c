@@ -6,6 +6,13 @@
 #define READ 0
 #define WRITE 1
 
+int toupper(int c) {
+  if (c >= 'a' && c <= 'z') {
+    return c - 'a' + 'A';
+  }
+  return c;
+}
+
 int main() {
   int fds1[2];
   int fds2[2];
@@ -36,10 +43,9 @@ int main() {
       char buffer[1024];
       read(fds1[READ], buffer, 1024);
 
-      int i;
-      while (buffer[i]) {
-        buffer[i]++;
-        i++;
+      // all uppercase buffer
+      for (int i = 0; i < strlen(buffer); i++) {
+        buffer[i] = toupper(buffer[i]);
       }
 
       write(fds2[WRITE], buffer, strlen(buffer));
